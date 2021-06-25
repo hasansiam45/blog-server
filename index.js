@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const ObjectId = require('mongodb').ObjectId;
 const { MongoClient } = require('mongodb');
 const port = 5000
 
@@ -50,6 +51,20 @@ client.connect(err => {
     })
     
     
+
+  // delete blogs
+    app.delete('/delete/:id',(req,res)=>{
+
+      const id = ObjectId(req.params.id)
+      blogCollection.deleteOne({
+      
+        _id: id
+
+      })
+        .then(result => console.log(result))
+        .then(err=> console.log(err))
+
+    })
     
     
     
