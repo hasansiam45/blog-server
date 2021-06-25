@@ -23,7 +23,21 @@ client.connect(err => {
     console.log(err)
     const blogCollection = client.db("blog").collection("posts");
 
+
+  // get blogs
+  app.get('/posts',(req,res)=>{
+
+    blogCollection.find()
+      .toArray((err, result) => {
+        res.send(result)
+      })
+
+  })
     
+
+
+
+  // posting blogs
     app.post('/addPost', (req, res) => {
     
         const newPost = req.body;
